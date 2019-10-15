@@ -7,6 +7,9 @@
   4. 以后会集成更多的博客平台  
 ![](https://img-blog.csdnimg.cn/20190926093033453.png)
 
+# 2019.10.15
+解决CSDN反爬虫问题
+
 # 免责声明
 
  工具免费，请不要用于侵权等各种行为，对于违法使用此工具所造成后果，本工具作者不负任何责任。
@@ -43,9 +46,13 @@
  
 ### []()使用方法
 
-  
-  2. 选择平台 
-  4. 粘贴对应网址 
-  6. 点击解析  
+1. 选择平台
+2. 粘贴对应网址
+3. 点击解析
+4. CSDN下载需要配置UserName和UserToken;(待优化为登陆)
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191015094146549.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTMyODQ3MDY=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191014094037967.png)
+
 --------
  如链接不能使用，或者工具失效，请与我联系。也欢迎提出各种宝贵意见。
