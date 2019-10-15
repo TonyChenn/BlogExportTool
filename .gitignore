@@ -1,12 +1,4 @@
 Source/BlogExport/bin
 Source/BlogExport/obj
 *.dat
-*.svd
-*.userprefs
-*.csproj
-*.pidb
-*.suo
-*.sln
-*.user
-*.unityproj
-*.booproj
+*.vs
