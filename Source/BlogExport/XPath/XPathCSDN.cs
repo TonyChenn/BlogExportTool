@@ -80,8 +80,8 @@ namespace BlogExport.XPath
             if (pageNum == 1)
             {
                 string html = Node.DocumentNode.InnerHtml;
-                m_totalPostCount = JsUtil.GetJsNumVariable(html, @"var\slistTotal\s=\s\d{1,3}");
-                m_perPagePostCount = JsUtil.GetJsNumVariable(html, @"var\spageSize\s=\s\d{1,3}");
+                m_totalPostCount = JsUtil.GetJsNumVariable(html, @"var\s+listTotal\s*?=\s*?\d{1,3}");
+                m_perPagePostCount = JsUtil.GetJsNumVariable(html, @"var\s+pageSize\s*?=\s*?\d{1,3}");
                 m_pageCount = m_totalPostCount / m_perPagePostCount + (m_totalPostCount % m_perPagePostCount > 0 ? 1 : 0);
             }
 
