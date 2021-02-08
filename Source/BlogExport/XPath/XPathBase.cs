@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BlogExport.XPath
 {
@@ -39,13 +35,16 @@ namespace BlogExport.XPath
 
 
         public abstract int GetPageCount();
-        public abstract int GetTotalPageCount();
-        public abstract string GetTitle();
-        public abstract string GetFileName();
-        public abstract string GetWriteTime();
-        public abstract string GetContent();
+        //public abstract int GetTotalPageCount();
+        //public abstract string GetTitle();
+        //public abstract string GetFileName();
+        //public abstract string GetWriteTime();
+        //public abstract string GetContent();
         public abstract List<Article> GetArticleList();
         public abstract void InitXPath(bool firstTime, string url, int pageCount = 1);
+
+        protected abstract void ParsePageData(int pageNum);
+        protected abstract void ParsePostData(string url);
         public abstract void DownLoadSelects(string folder, List<int> selectList);
         protected abstract bool CheckLogin(); 
     }

@@ -37,17 +37,14 @@
       <HintPath>..\packages\BFound.HtmlToMarkdown.0.0.5\lib\net45\BFound.HtmlToMarkdown.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="fastJSON, Version=2.2.3.0, Culture=neutral, PublicKeyToken=6b75a806b86095cd, processorArchitecture=MSIL">
-      <HintPath>..\packages\fastJSON.2.2.4\lib\net40\fastJSON.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="fastJSON, Version=2.4.0.0, Culture=neutral, PublicKeyToken=6b75a806b86095cd, processorArchitecture=MSIL">
+      <HintPath>..\packages\fastJSON.2.4.0.2\lib\net40\fastJSON.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.11.16.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.11.16\lib\Net45\HtmlAgilityPack.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HtmlAgilityPack, Version=1.11.30.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.30\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="MarkdownLog, Version=0.9.3.36, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MarkdownLog.0.9.3\lib\portable-net45+sl50+MonoAndroid10+MonoTouch10\MarkdownLog.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,6 +80,7 @@
     <Compile Include="Util\FileUtil.cs" />
     <Compile Include="Util\HttpUtils.cs" />
     <Compile Include="Util\JsUtil.cs" />
+    <Compile Include="Util\WinformUtil.cs" />
     <Compile Include="XPath\XPathBase.cs" />
     <Compile Include="XPath\XPathCSDN.cs" />
     <EmbeddedResource Include="Form1.resx">

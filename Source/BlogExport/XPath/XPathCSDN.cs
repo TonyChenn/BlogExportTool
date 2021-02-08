@@ -15,8 +15,6 @@ namespace BlogExport.XPath
         int m_totalPostCount;
         int m_perPagePostCount;
         int m_pageCount;
-        int m_title;
-        int m_time;
         string UserName, Token;
 
         //账号密码登陆
@@ -26,35 +24,13 @@ namespace BlogExport.XPath
         {
             return m_articleList;
         }
-
-        public override string GetContent()
-        {
-            throw new NotImplementedException();
-        }
-        public override int GetTotalPageCount()
-        {
-            throw new NotImplementedException();
-        }
-        public override string GetFileName()
-        {
-            throw new NotImplementedException();
-        }
-
         public override int GetPageCount()
         {
             return m_pageCount;
         }
-
-        public override string GetTitle()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string GetWriteTime()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// 初始化xPath
+        /// </summary>
         public override void InitXPath(bool firstTime, string url, int pageCount = 1)
         {
             this.m_url = url;
@@ -68,25 +44,33 @@ namespace BlogExport.XPath
                 Content = "//div[@id='article_content']";
                 tags = "//a[@class='tag-link']";
             }
-            PaseData(pageCount);
+            ParsePageData(pageCount);
         }
 
-
-        void PaseData(int pageNum)
+        /// <summary>
+        /// 按页解析
+        /// </summary>
+        /// <param name="pageNum"></param>
+        protected override void ParsePageData(int pageNum)
         {
-            var client = new HtmlWeb();
             m_url = m_url.TrimEnd('/') + "/article/list/" + pageNum;
-            var Node = client.Load(m_url);
+            var Node = HttpUtils.GetHtmlNodeFromUrl(m_url);
+
             if (pageNum == 1)
             {
-                string html = Node.DocumentNode.InnerHtml;
+                string html = Node.InnerHtml;
                 m_totalPostCount = JsUtil.GetJsNumVariable(html, @"var\s+listTotal\s*?=\s*?\d{1,3}");
+                if (m_totalPostCount == 0)
+                {
+                    WinformUtil.ShowDialog("提示", "空空如也");
+                    return;
+                }
                 m_perPagePostCount = JsUtil.GetJsNumVariable(html, @"var\s+pageSize\s*?=\s*?\d{1,3}");
                 m_pageCount = m_totalPostCount / m_perPagePostCount + (m_totalPostCount % m_perPagePostCount > 0 ? 1 : 0);
             }
 
-            var postNodes = Node.DocumentNode.SelectNodes(PerPageArticalList);
-            if(postNodes!=null)
+            var postNodes = Node.SelectNodes(PerPageArticalList);
+            if (postNodes != null)
             {
                 int index = 0;
                 m_articleList.Clear();
@@ -113,6 +97,15 @@ namespace BlogExport.XPath
             }
         }
 
+        /// <summary>
+        /// 解析单个博文
+        /// </summary>
+        /// <param name="url"></param>
+        protected override void ParsePostData(string url)
+        {
+            
+        }
+
         public override void DownLoadSelects(string folder, List<int> selectList)
         {
             string error = "";
@@ -121,6 +114,7 @@ namespace BlogExport.XPath
                 int index = selectList[i];
                 try
                 {
+                    
                     string url = "https://mp.csdn.net/mdeditor/getArticle?id=" + m_articleList[index].Id;
 
                     FileUtil.GetToken("csdn_config.dat", out UserName, out Token);
@@ -144,7 +138,7 @@ namespace BlogExport.XPath
 
                     var req = (HttpWebRequest)WebRequest.Create(url);
                     req.Method = "POST";
-                    req.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36";
+                    req.UserAgent = HttpUtils.RandomUserAgent();
                     req.ContentType = "text/html;charset=UTF-8";
                     req.CookieContainer = cc;
                     var resp = (HttpWebResponse)req.GetResponse();
@@ -168,12 +162,14 @@ namespace BlogExport.XPath
             }
             if (!string.IsNullOrEmpty(error))
             {
-                System.Windows.Forms.MessageBox.Show("Fuck,Token过期了，重新粘贴下吧");
+                System.Windows.Forms.MessageBox.Show(error/*"Fuck,Token过期了，重新粘贴下吧"*/);
                 Form1.Singlton.cSDNUserTokenToolStripMenuItem_Click(null, null);
             }
         }
 
-        
+        /// <summary>
+        /// 获取文章ID
+        /// </summary>
         string GetIdByUrl(string url)
         {
             string[] temp = url.Split('/');
@@ -181,6 +177,9 @@ namespace BlogExport.XPath
             return temp[length - 1];
         }
 
+        /// <summary>
+        /// 检查登录
+        /// </summary>
         protected override bool CheckLogin()
         {
             throw new NotImplementedException();
